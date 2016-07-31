@@ -284,7 +284,7 @@
           
             <p>总算用HEXO和Github成功的构建了博客。<br>先是按照<a href="http://www.jianshu.com/p/465830080ea9" target="_blank" rel="external">HEXO+Github,搭建属于自己的博客</a>一步一步进行，然而即便在本地已经可以运行，还自己配置简洁美观的主题<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT.Mist</a>，但是却始终没能成功部署到github上。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repo:https://github.com/leopardpan/leopardpan.github.io.git</div><div class="line">  branch:master</div></pre></td></tr></table></figure></p>
 <p>这几行配置项看起来是没什么问题的，然而在我尝试了各种可能的type和repo之后，依然想要微笑面对生活。<br>过程中，我还以为的ssh_key出现了问题，还以为这个仓库还要单独的配上一个Deploy keys。这名字让我差点就信了，直到我在<a href="http://blog.csdn.net/SmallCheric/article/details/51049691" target="_blank" rel="external">史上最新版GitHub+Hexo配置系列教程</a>看到这一行。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repository: https://github.com/suericze/suericze.github.io.git </div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repository: https://github.com/suericze/suericze.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
 <blockquote>
 <p>因yml格式问题,所有键值对的”:”冒号后面必须跟有一个空格</p>
 </blockquote>
@@ -567,7 +567,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
