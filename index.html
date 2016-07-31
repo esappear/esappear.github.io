@@ -238,6 +238,108 @@
             
               
                 
+                <a class="post-title-link" href="/2016/07/31/about-hexo-fithub/" itemprop="url">
+                  使用HEXO和Github搭建博客有感
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-31T15:57:26+08:00" content="2016-07-31">
+              2016-07-31
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>总算用HEXO和Github成功的构建了博客。<br>先是按照<a href="http://www.jianshu.com/p/465830080ea9" target="_blank" rel="external">HEXO+Github,搭建属于自己的博客</a>一步一步进行，然而即便在本地已经可以运行，还自己配置简洁美观的主题<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT.Mist</a>，但是却始终没能成功部署到github上。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line"></div><div class="line">  <span class="built_in">type</span>: git</div><div class="line"></div><div class="line">  repo:https://github.com/leopardpan/leopardpan.github.io.git</div><div class="line"></div><div class="line">  branch:master</div></pre></td></tr></table></figure></p>
+<p>这几行配置项看起来是没什么问题的，然而在我尝试了各种可能的type和repo之后，依然想要微笑面对生活。</p>
+<p>过程中，我还以为的ssh_key出现了问题，还以为这个仓库还要单独的配上一个Deploy keys。这名字让我差点就信了，直到我在(史上最新版GitHub+Hexo配置系列教程)[<a href="http://blog.csdn.net/SmallCheric/article/details/51049691]看到这一行。" target="_blank" rel="external">http://blog.csdn.net/SmallCheric/article/details/51049691]看到这一行。</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">deploy: </div><div class="line"></div><div class="line">  <span class="built_in">type</span>: git </div><div class="line"></div><div class="line">  repository: https://github.com/suericze/suericze.github.io.git </div><div class="line"></div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<blockquote>
+<p>因yml格式问题,所有键值对的”:”冒号后面必须跟有一个空格</p>
+</blockquote>
+<p>于是心中千万头草泥马奔腾而过，在_config.yml的deploy的键值对的”:”后加了空格，然后居然成功了。。。</p>
+<p>我的天，折腾了半天，最后败在了这几个空格之上。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/07/31/one-post/" itemprop="url">
                   one post
                 </a>
@@ -456,7 +558,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -466,7 +568,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
