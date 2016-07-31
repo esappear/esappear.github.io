@@ -3,11 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Shawn's Blogs
 subtitle:
-description:
-author: John Doe
-language:
+description: 人生得意须尽欢
+author: Shawn
+avatar: https://avatars2.githubusercontent.com/u/13843099
+language: zh-Hans
 timezone:
 
 # URL
@@ -63,9 +64,11 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type:git
+  repo:https://github.com/esappear/esappear.github.io.git
+  branch:master
