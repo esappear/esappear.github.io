@@ -71,4 +71,4 @@ theme: next
 deploy:
   type: git
   repo: https://github.com/esappear/esappear.github.io.git
-  branch: master
+  branch: gh-pages
