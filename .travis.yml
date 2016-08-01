@@ -1,19 +1,23 @@
 language: node_js
 branches:
   only:
-  -  pages-origin
+  - pages-origin
 before_install:
 - npm install -g hexo
 - npm install -g hexo-cli
-- git clone https://github.com/iissnan/hexo-theme-next themes/next
-before_script:
-- git config --global user.name esappear
-- git config --global user.email 624835942@qq.com
-- sed -i'' "s~git@github.com:esappear/esappear.github.io.git~https://${db887753970626f1e667ae6f077b9bf84c26f9bf}:x-oauth-basic@github.com/esappear/esappear.github.io.git~" _config.yml
+- git submodule init
+- git submodule update
 install:
 - npm install
 script:
 - hexo clean
 - hexo g
 after_success:
+- git config --global user.name "esappear"
+- git config --global user.email "624835942@qq.com"
+- sed -i'' "s~git@github.com:esappear/esappear.github.io.git~https://${GH_TOKEN}:x-oauth-basic@github.com/esappear/esappear.github.io.git~"
+  _config.yml
 - hexo d
+env:
+  global:
+    secure: c2JdeE0rh/PF4DprrdhUdn6U/8ZML9aEWOxcM6BUrCmFRPfoiHFPq1GRrxO7k6XaVgryGOBHLuntXazV4hHGhlQag6g3sBq8KO9mw//j4zExZPCBIQoD569fRueCMoqo5IBn5wICBzFPf4Gl/FFq9T1SHA0jRdiCu3ghXBiBn02Q5AJkasjaBdtWYB7/7uwgzn1WuIBjZjb1VeZ7wvzPN9q3He8XtgRuCcsZO7xB0GjIK6jyX2xZFdeX95qrDD5Zs8TtvFgeXEdeqrUC7JTt6pclGEMlMG8G2ZdgAkiCyY0AtznTWeHIEDfa+XH0xLGEHBT2IsQ2Jv7YhKcOo3kTum627dBE2SLw0GBzobhnciDHB8HmwfGuTmZx+w3vmxAn43DhUtC+3ECLMwVhj3iXHqQ13BiT/YJLqeHHZ2Ae0fPfQj65Ar9vpqjNExt6N75ihR0Xl2XNM86xvKwmhEEXmvr5rFwpsPFW3Kkj9Pj5ER0NCbhL2LAQmrWqFCSZpMmzvxfvvxsy4SOUq2TIdJjl5CVT0LIpoW7BnocPAkZ79vITOLc8tfMfyJKgDNPB/M3F3fPUsNzky/pLvdPpjsZ0fhpZqYAnwlTwHB/rp4/fp+DeENVffN0P1oN+UeOptArKLIX4plGJkmuKCjc1RV1etKC6bs6ht7WoZdmhZNEogM4=
