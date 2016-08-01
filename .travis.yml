@@ -2,7 +2,7 @@ language: node_js
 branches:
   only:
   - pages-origin
-cache: 
+cache:
   directories:
   - node_modules
 before_install:
