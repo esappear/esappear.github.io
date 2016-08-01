@@ -14,8 +14,10 @@ script:
 after_success:
 - git config --global user.name "esappear"
 - git config --global user.email "624835942@qq.com"
-- sed -i'' "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
+#- sed -i'' "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
+- git push -f "https://${GH_TOKEN}@${GH_REF}" master:master
 - hexo d
 env:
   global:
-    secure: lN66pwSiKMlS4qdUWfqTaroHPxegwTSvVSoBmyyYGvO0gZE60sRRVBykHhvbikywPi4A0L58ZaLtBP2WpmKYhtSgxMfrMlvOqRDwTgcAp12h7FuzBfvFQV0AdnE76fjFtwI4GTqHWg05euYMM2UbqH7XM28RaKSbFoWS4x5T+YBkyNQJZCqcr0EDfRPNP6MJDggFHy8Sm21BiWNXYkoO9nY9W5OG2lrK2lZAAvufh0Wu1lZLczs/M0/NUJ9mAMcHIhdgMjxKPVK+eFZ0SkW8FMrn7f7OyoS99qhQpVlr1di4pXH2VTzhPm5t54UrTV8gwOIWkk2veb9Tsta0JzKR7OlQapFGK9+61SA+QIxqkXqvBCV4FbDljMfK36q/LePLBAJIqBj0DWDw/lgewDSY/A/m6qvyJ+aQO+3RsZku88DXO52QH/egXF8na/8y4nd7pmPnky/L6fzNjORvGwMx45hT3RuRXQp9hRP5Onq0tBGaPzr2Xs2NMLYMkjxKugacd6sBz4b6D6F1TeCPs1O9kdIh6GJpdzsMmCI2z2pDXcpveWR8eVJB/5Wvfzm9r2Xvb40g2qWUN6kPA3KUkf4WeKd2rPMOjWKqil2goz9qBkv1kBZz10Q9C96KiiDIHwsrLngBG+UiBu8FPHHxdoufNZCfJu6b51LkcML9/5skRpg=
+  - GH_REF: github.com/esappear/esappear.github.io.git
+  - secure: "N1w19aUzb0Q+E+4hM3g0v0xDTuQ8x5w0CHpxBJGtr8rPIuHoKBWwvxXxka7rfWX5IQdqXnL8Kf6d1Usqcz/jMWDZuEsAsYUl4DSPpVwrSdj8Bto6rMMdqfnxYGv+J5t1Wasef8NKuntJFX0YZouaV48boWK07ZdOMxFoNJeMqGWoU3TSVjnz9E/xViDcLH6/AD050vycx0uT/DVJFDUYL0CPT1of9CvyzVpUXxuiV9PSzwMObUPjJTcmsNNZyDbL8bF5OalL+4EiBkAXl+F0YfIUlaPeBbvADamurqI66yIOzr7huX2jQAMsh56Ym20ajcy7HaoUrb/+9rzUFrh3cSCI2f1A+j+6sDRcmDM3oRkY1+mBbC4xbMTwz0O4eHIUQmT2aggJ9LjWXrVKm+EefKhK10/bFM9VYQao2e938pKDhJn8eNWq2/4VUAfDPMuQ2zQqAa9i7zWrLRjslBYtROdsDiXdyi+NEF3etWzz0wOze81g74WlUJ+18wHiAZVH66YcCNZOBcR9tESk37j2XQUp6ibvPrNCa0WE9bRN6jeoFyJ33Dt+v6H4J6cCr+zKSgVPjKUtPqwcGwWcYcfKqMmY/0NJ9vvylV8keYo3ra9t9GYJ599FTM5snSA1RgM7fAA8Wb+XEqWluaFczN5YgM2FnaX95d5MIevjK90Qnkg="
