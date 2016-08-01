@@ -6,6 +6,10 @@ before_install:
 - npm install -g hexo
 - npm install -g hexo-cli
 - git clone https://github.com/iissnan/hexo-theme-next themes/next
+before_script:
+- git config --global user.name esappear
+- git config --global user.email 624835942@qq.com
+- sed -i '' "s~git@github.com:esappear/esappear.github.io.git~https://${db887753970626f1e667ae6f077b9bf84c26f9bf}:x-oauth-basic@github.com/esappear/esappear.github.io.git~" _config.yml
 install:
 - npm install
 script:
