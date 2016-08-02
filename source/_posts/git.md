@@ -1,7 +1,7 @@
 ---
-title: git
+title: 几个git命令
 date: 2016-08-01 01:47:18
-tags:
+tags: [git]
 ---
 
 学到几个git的新命令
