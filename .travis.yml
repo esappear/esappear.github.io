@@ -16,7 +16,7 @@ before_install:
 - git config --global user.email 624835942@qq.com
 - npm install -g hexo
 - npm install -g hexo-cli
-- git clone https://github.com/iissnan/hexo-theme-next themes/next
+#- git clone https://github.com/iissnan/hexo-theme-next themes/next
 install:
 - npm install
 script:
