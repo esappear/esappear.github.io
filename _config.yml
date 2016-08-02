@@ -72,3 +72,11 @@ deploy:
   type: git
   repo: git@github.com:esappear/esappear.github.io.git
   branch: master
+
+## Search
+search:
+  path: search.xml
+  field: post
+
+# Swiftype Search Key
+swiftype_key: EoW2PkcNcraWs2K-_Uzn
