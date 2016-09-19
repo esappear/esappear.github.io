@@ -80,3 +80,12 @@ search:
 
 # Swiftype Search Key
 swiftype_key: bfYMnGcz88ikzvqomNK-
+
+## 数据分析
+baidu_analytics: 90acdea32f2e6fa9d12e9992252a5378
+google_analytics: UA-84379338-1
+tencent_analytics: 58580920
+
+# 多说相关服务
+duoshuo_shortname: esappear
+duoshuo_share: true
