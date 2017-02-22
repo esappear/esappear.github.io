@@ -12,6 +12,9 @@ tags: [layout, 布局, 垂直居中]
 </div>
 ```
 ```
+.wrap {
+	font-size: 0; //去掉换行引起的多余空间
+}
 .icn {
 	display: inline-block;
 	vertical-align: middle;
