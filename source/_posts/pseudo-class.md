@@ -41,18 +41,13 @@ tags: [CSS, 伪类, 伪元素]
 ##### 表单通用
 - `:disabled` 禁用的
 - `:enabled` 可用的
----
 - `:required` 必选的
 - `:optional` 可选的
----
 - `:read-only` 只能读
 - `:read-write` 能读能写
----
 - `:default` 默认样式，对button input option 有用，目测平时用不着
----
 - `:valid` 合法的
 - `:invalid` 非法的
----
 - `:focus` // 通用伪类，对于表单元素来说更常见
 
 对于上面成双成对的，日常使用的话应该只会用其中一个，如`:disabled`,`:required`,`:read-only`,毕竟他们的另一半都是默认的。。
