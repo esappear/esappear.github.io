@@ -53,7 +53,7 @@ tags: [CSS, 伪类, 伪元素]
 对于上面成双成对的，日常使用的话应该只会用其中一个，如`:disabled`,`:required`,`:read-only`,毕竟他们的另一半都是默认的。。
 
 ##### 文本类
-- `:placeholder-shown` // 草稿中
+- `:placeholder-shown` // 草稿中 可以指定显示placeholder的时候input元素的样式，注意这不能修改placeholder的样式，如果想要修改，请使用`::placeholder`
 
 ##### 选择类
 - `:checked` 包括`input[type="checkbox"]:checked`, `input[type="radio"]:checked`, `option:checked`(实际上并没有什么卵用，因为option的样式并不能通过CSS来修改)
@@ -74,3 +74,4 @@ tags: [CSS, 伪类, 伪元素]
 
 #### 仅双冒号
 - `::selection` 文档中被用户高亮的部分，只支持color, background-color, cursor, outline, text-decoration, text-emphasis-color和text-shadow
+- `::placeholder` input元素中placeholder文本的样式
