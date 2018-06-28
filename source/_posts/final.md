@@ -1,10 +1,7 @@
 ---
 title: 终于可以自动化部署了
 date: 2016-08-02 00:56:16
-tags:
-- HEXO
-- Github
-- travis
+tags: [HEXO, Github, travis]
 ---
 终于用travis搞定自动化部署了,开心~
 *****

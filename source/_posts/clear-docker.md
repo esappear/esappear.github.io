@@ -1,7 +1,7 @@
 ---
 title: 一键清理没用的docker容器 
 date: 2018-06-19 14:07:45
-tags: shell, docker
+tags: [shell, docker]
 ---
 ```
 docker ps -a | grep Exited | cut -d ' ' -f 1 | xargs docker rm

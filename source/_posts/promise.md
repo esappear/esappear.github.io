@@ -1,7 +1,7 @@
 ---
 title: Promise对象
 date: 2016-08-23 23:35:03
-tags: [Promise, ES6]
+tags: [Promise, ES6, JavaScript]
 ---
 最近调研Promise,在小组内部分享,懒得再展开整理了,先把提纲什么的放在这么晾晾~
 ### promise的由来 

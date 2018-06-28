@@ -1,7 +1,7 @@
 ---
 title: Android机型 translate-3d的点击穿透问题
 date: 2016-09-26 16:23:07
-tags: [CSS, translate-3d, 点击穿透]
+tags: [css, 坑, translate-3d, 点击穿透]
 ---
 
 某元素

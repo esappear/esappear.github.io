@@ -1,7 +1,7 @@
 ---
 title: 图片和文字垂直居中对齐
 date: 2016-12-11 15:40:20
-tags: [CSS, 垂直居中对齐]
+tags: [css, 垂直居中]
 ---
 块级元素内的行内元素（包括inline和inline-block）的垂直居中
 

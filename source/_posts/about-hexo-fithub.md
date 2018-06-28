@@ -1,9 +1,7 @@
 ---
 title: 使用HEXO和Github搭建博客有感
 date: 2016-07-31 15:57:26
-tags:
-- HEXO
-- Github
+tags: [HEXO, Github, 总结]
 ---
 
 总算用HEXO和Github成功的构建了博客。
