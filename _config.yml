@@ -13,7 +13,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://esappear.github.io
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -74,18 +74,20 @@ deploy:
   branch: master
 
 ## Search
-search:
-  path: search.xml
-  field: post
+# search:
+#   path: search.xml
+#   field: post
+#   format: html
+#   limit: 10000
 
 # Swiftype Search Key
-swiftype_key: bfYMnGcz88ikzvqomNK-
+# swiftype_key: bfYMnGcz88ikzvqomNK-
 
 ## 数据分析
 baidu_analytics: 90acdea32f2e6fa9d12e9992252a5378
 google_analytics: UA-84379338-1
-tencent_analytics: 58580920
+# tencent_analytics: 58580920
 
 # 多说相关服务
-duoshuo_shortname: esappear
-duoshuo_share: true
+# duoshuo_shortname: esappear
+# duoshuo_share: true
