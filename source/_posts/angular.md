@@ -12,7 +12,8 @@ tags: [AngularJS, 总结]
 
 ## ModelFactory
 为了解决上述的几个问题，我们抽象出一个通用的`factory` -- `ModelFactory`, 它主要做下面几件事情。
-1. 提供一个叫`ModelFactory`的构造函数，其衍生的实例提供`get`、`save`、`update`、`delete`四种资源获取方法，分别代理了`$resource`对应的四种请求方法。
+
+1. 添加构造函数`ModelFactory`，其衍生的实例提供`get`、`save`、`update`、`delete`四种资源获取方法，分别代理了`$resource`对应的四种请求方法。
 2. 在代理的过程中处理了响应主体的数据，将真正的数据传到下一层。
 3. 支持在上述每个方法的代理过程中添加对应的`formatter`和`preFormatter`，只需在具体的实例中添加对应方法即可。
 4. 添加资源获取时的Promise对象缓存，缓存时间内的同一种请求返回同一个Promise对象，从而实现在多次资源获取中只有一次请求。
