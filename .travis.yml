@@ -16,13 +16,11 @@ before_install:
 - cp .travis/ssh_config ~/.ssh/config
 - git config --global user.name "esappear"
 - git config --global user.email 624835942@qq.com
-- npm install -g hexo
-- npm install -g hexo-cli
 #- git clone https://github.com/iissnan/hexo-theme-next themes/next
 install:
 - npm install
 script:
-- hexo clean
-- hexo g
+- ./node_modules/hexo/bin/hexo clean
+- ./node_modules/hexo/bin/hexo g
 after_success:
-- hexo d
+- ./node_modules/hexo/bin/hexo d
