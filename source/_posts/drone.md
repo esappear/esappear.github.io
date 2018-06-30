@@ -14,7 +14,7 @@ tags: [drone, 持续集成, CI, 持续交付]
 - gulp-header 在文件头部加上header，使得生成出来的文件有逼格
 - gulp-upyun、gulp-eslint、gulp-rename、gulp-cssnano、gulp-uglify等看到名字就知道能干嘛的插件
 
-当然这次项目的挑战性还是在持续集成上，虽然之前折腾过用`travis.ci`自动化部署个人博客，但这次还是蛋疼了一段时间，主要点在要将生成的文档这一堆静态文件部署到gh-page上。因为这次的项目是放在公司自己搭建的git服务器上的，但是公司的git服务不支持gh-page, 想要像`https://qingchengfed.github.io/angular-clover-ui/`这样轻松的访问该项目的文档不太现实。而且这个项目的文档是有脚本的，是要用到angular的，所以gitbook也不能满足要求。
+当然这次项目的挑战性还是在持续集成上，虽然之前折腾过用`Travis CI`自动化部署个人博客，但这次还是蛋疼了一段时间，主要点在要将生成的文档这一堆静态文件部署到gh-page上。因为这次的项目是放在公司自己搭建的git服务器上的，但是公司的git服务不支持gh-page, 想要像`https://qingchengfed.github.io/angular-clover-ui/`这样轻松的访问该项目的文档不太现实。而且这个项目的文档是有脚本的，是要用到angular的，所以gitbook也不能满足要求。
 
 在尝试过多种方法后，最终还是采用了在项目下建个临时文件夹，拉下指定的仓库后，生成commit后强制push到远程的方法。
 
