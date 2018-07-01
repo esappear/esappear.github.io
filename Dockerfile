@@ -9,8 +9,8 @@ WORKDIR /blog
 
 # The RUN instruction will execute any commands
 # Adding HelloWorld page into Nginx server
-RUN npm install -g hexo --registry=https://registry.npm.taobao.org
-RUN npm install --registry=https://registry.npm.taobao.org
+RUN npm install -g hexo --registry=https://registry.npm.taobao.org \
+  && npm install --registry=https://registry.npm.taobao.org
 
 # The EXPOSE instruction informs Docker that the container listens on the specified network ports at runtime
 EXPOSE 4000
