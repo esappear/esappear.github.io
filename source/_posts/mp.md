@@ -20,7 +20,7 @@ tags: [小程序, 微信小程序]
 #### 构建工具
 gulp + typescript
 #### 项目结构
-```
+```plain
 .
 ├── 3rd
 │   ├── upyun-wxapp-sdk.d.ts
@@ -82,7 +82,7 @@ gulp + typescript
 
 #### 逻辑复用
 - 可以用behavior实现组件间的代码复用，如自定义的表单组件
-```
+```js
   export default Behavior({
     properties: {
       value: {
@@ -105,7 +105,7 @@ gulp + typescript
 - 组件与页面间的代码复用只能用类`extend`或`assign`的方式实现
 
 #### filter要用wxs
-```
+```js
 // date.wxs
 module.exports = function dateStr(str, formatter) {
   if (!str) return '';
@@ -118,7 +118,7 @@ module.exports = function dateStr(str, formatter) {
     .replace('ss', (time.getSeconds() < 10 ? '0' : '') + time.getSeconds());
 }
 ```
-```
+```html
 // xxx.wxml
 <wxs src="../../filters/date.wxs" module="date"></wxs>
 
@@ -132,7 +132,7 @@ module.exports = function dateStr(str, formatter) {
 - 父传子：插值
 - 子传父：事件
 
-```
+```js
 // image_uploader.js
 import upyunSvc from '../../utils/upyun';
 
@@ -206,7 +206,7 @@ Component({
 });
 ```
 
-```
+```js
 // Demo.wxml
 <image-uploader value="http://xxx.avatar.com" name="avatar" bind:change="onImageChange" />
 
@@ -219,11 +219,11 @@ Page({
 ```
 
 #### 事件的绑定及其值的传递
-```
+```js
 // example.wxml
 <view bindtap="jump" data-url="/page/example"></view>
 ```
-```
+```js
 // example.js
 Page({
   jump(event: TapEvent) {

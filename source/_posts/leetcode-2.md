@@ -12,7 +12,7 @@ tags: [一日一题, 算法, leetcode, python, 数组]
 你可以不用到任何额外空间并在O(n)时间复杂度内解决这个问题吗？
 
 **代码**
-```
+```python
 class Solution:
     def findDuplicates(self, nums):
         """

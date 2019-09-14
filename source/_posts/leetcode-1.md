@@ -18,7 +18,7 @@ tags: [一日一题, 算法, leetcode, python, 动态规划]
 - 你可以假设字典中没有重复的单词。
 
 **代码**：
-```
+```python
 class Solution:
     def wordBreak(self, s, wordDict, wordMap = None):
         """

@@ -5,7 +5,7 @@ tags: [算法, 面试]
 ---
 > 面试的时候被问了大数相加的问题，马克一下吧~ 顺便试下大数相乘。
 # 大数相加
-```
+```js
 function add(n1, n2) {
   const a1 = n1.split('').reverse();
   const a2 = n2.split('').reverse();
@@ -21,7 +21,7 @@ function add(n1, n2) {
 }
 ```
 # 大数相乘
-```
+```js
 function multiply(n1, n2) {
   const a1 = n1.split('').reverse();
   const a2 = n2.split('').reverse();

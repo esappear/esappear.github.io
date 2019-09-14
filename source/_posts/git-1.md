@@ -18,14 +18,14 @@ tags: [git]
 #### 个人常用的命令
 []为可选项，<>为必需项
 ##### 初始化
-```
+```bash
 $ git init [project_name]
 $ git clone <url>
 ```
 ##### 配置
 配置文件.gitconfig
 
-```
+```bash
 # 显示当前的Git配置
 $ git config --list
 
@@ -37,7 +37,7 @@ $ git config [--global] user.name "<name>"
 $ git config [--global] user.email "<email address>"
 ```
 ##### 代码提交
-```
+```bash
 # 提交工作区自上次commit之后的变化，直接到仓库区
 # 等效于 git add . && git commit
 $ git commit -a
@@ -48,7 +48,7 @@ $ git commit -a
 $ git commit --amend -m [message] [file]
 ```
 ##### 分支
-```
+```bash
 # 列出所有远程分支
 $ git branch -r
 
@@ -63,7 +63,7 @@ $ git push origin --delete <branch-name>
 $ git branch -dr <remote> <branch-name>
 ```
 ##### 标签
-```
+```bash
 # 新建一个tag在指定commit
 $ git tag <tag> [commit]
 
@@ -75,7 +75,7 @@ $ git push [remote] --tags
 ```
 
 ##### 查看信息
-```
+```bash
 # 显示某个文件的版本历史，包括文件改名
 $ git log --follow [file]
 $ git whatchanged [file]
@@ -94,7 +94,7 @@ $ git show [commit]:[filename]
 ```
 
 ##### 远程同步
-```
+```bash
 # 下载远程仓库的所有变动
 $ git fetch [remote]
 
@@ -106,7 +106,7 @@ $ git remote add [shortname] [url]
 ```
 
 ##### 撤销
-```
+```bash
 # 恢复上一个commit的所有文件到工作区
 $ git checkout .
 

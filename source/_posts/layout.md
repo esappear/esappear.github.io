@@ -14,7 +14,7 @@ date: 2016-08-04 09:48:43
 > 给包裹着三个元素的 container 加一个 padding, 让 padding-left 和 padding-right 的数值是 left 和 right 的宽度，然后利用相对定位把他们再移动在两旁。
 
 圣杯布局的HTML结构如下:
-``` bash
+``` html
 <div id="header">header</div>
 <div id="container">
     <div id="main" class="column">main</div>
@@ -25,7 +25,7 @@ date: 2016-08-04 09:48:43
 ```
 
 CSS 样式如下:
-``` bash
+``` css
 body {
     min-width: 550px;      /* 2x LC width + RC width */
 }
@@ -71,7 +71,7 @@ body {
 
 ##### 如果要等高
 需要对`margin-bottom`和`padding-bottom`进行调整
-``` bash
+``` css
 #container {
   overflow: hidden;
 }
@@ -86,7 +86,7 @@ body {
 > 在 container 里面再添加一个 div, 然后对这个 div 进行 margin-left 和 margin-right.
 
 HTML 较圣杯布局的调整主要是在`#main`中添加了`#wrap`, 并将主要内容写在`#wrap`中.
-``` bash
+``` html
 <div id="header">head</div>
     <div id="container cleanfix">
         <div id="main">
@@ -98,7 +98,7 @@ HTML 较圣杯布局的调整主要是在`#main`中添加了`#wrap`, 并将主�
 <div id="foot">foot</div>
 ```
 其CSS 样式如下:
-``` bash
+``` css
 #left, #right, #main {
     float: left;
 }

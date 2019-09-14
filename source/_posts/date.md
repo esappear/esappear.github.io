@@ -6,13 +6,13 @@ tags: [坑, JavaScript]
 目测自己应该很久才会有一次比较大的产出了，但是如果每次都等着憋大招，那什么也不用做了。那还是从平时踩到的坑开始吧，即便只是解决一个比较小的问题，还是做下笔记比较好，谨防以后再次碰到。
 
 后端传的时间均为`2017-08-25T10:00:00`的格式，这个在比较两个均没有offset的时间的时候没什么问题，但是一旦将这个时间与当前时间比较就会有问题，因为`new Date()`出来的`Date`对象是带着offset信息的， 如`Fri Aug 25 2017 14:43:03 GMT+0800 (CST)`。因此，在与当前时间比较时，一定要手动加上offset。
-```
+```js
 var time = '2017-08-25T10:00:00';
 new Date(time) // Safari Fri Aug 25 2017 18:00:00 GMT+0800 (CST)
 new Date(time) // Chrome Fri Aug 25 2017 10:00:00 GMT+0800 (CST)
 ```
 angular 中添加一个filter，方便复用。
-```
+```js
 app.filter('addTimeZoneOffset', [function () {
   var _offset = parseInt(new Date().getTimezoneOffset() / 60);
   // 获取当前时区的offset，东八区值为-8，表示格林时间落后东八区8个小时。

@@ -5,7 +5,7 @@ tags: [css, trick, 三角形]
 ---
 普通的三角形在CSS中可通过指定上下左右四个方向的border来实现。
 如下面的代码可以声明出一个宽12px、高6px的倒立的等腰三角形。
-```
+```css
 border-top: solid 6px #fff;
 border-left: solid 6px transparent;
 border-right: solid 6px transparent;
@@ -13,7 +13,7 @@ border-right: solid 6px transparent;
 但想要这个三角形有阴影，直接声明`box-shadow`是没用的，因为这个声明是对整个盒子模型生效的，这样声明出来的三角形会在四周有一个“很方”的阴影。
 
 这个问题可以通过再声明一个伪元素，让这个伪元素高度或宽度足够小，所有的阴影效果声明在这个伪元素上。然后让三角形覆盖在上面，这样就可以trick出一个有阴影的三角形了。
-```
+```css
 // less中声明一个带三角和阴影的消息对话框
 .message-box {
   width: 300px;

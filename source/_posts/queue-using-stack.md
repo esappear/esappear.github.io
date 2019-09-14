@@ -5,7 +5,7 @@ tags: [算法, 栈, 队列, 面试]
 ---
 > 又是一道被面试题，虽然据说是基础题，但是方法还是很巧妙，值得马克。
 
-```
+```js
 class Stack {
   constructor() {
     this.stack = [];

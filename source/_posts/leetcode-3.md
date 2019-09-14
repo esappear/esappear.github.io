@@ -15,7 +15,7 @@ tags: [一日一题, 算法, leetcode, python, 树]
 
 
 **代码**
-```
+```python
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, x):

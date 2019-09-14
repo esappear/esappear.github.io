@@ -9,7 +9,7 @@ tags: [apache, 代理]
 
 2. `sudo vim /etc/apache2/extra/httpd-vhosts.conf`
 添加以下内容并保存（具体域名信息和代理端口可自由配置）：
-```
+```conf
 <VirtualHost *:80>
     ServerName "local.waptest.taobao.com"
     ServerAlias "local.wapa.taobao.com"

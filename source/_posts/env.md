@@ -23,7 +23,7 @@ tags: [环境配置, mac, python]
 	- `[sudo] pip install virtualenv`
 	- `cd .virtualenvs && vim postactivate`
 
-	```
+	```bash
 	#!/bin/zsh
 	# This hook is run after every virtualenv is activated.
 	PS1="$_OLD_VIRTUAL_PS1"
@@ -50,7 +50,7 @@ tags: [环境配置, mac, python]
 	- `mysql -u root -p [database_name] < [mysql file]`
 	- 配置项目的env
 	
-		```
+		```python
 		# -*- coding: utf-8 -*-
 		# __author__ = chenchiyuan
 		

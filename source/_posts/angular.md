@@ -18,7 +18,7 @@ tags: [AngularJS, 总结]
 3. 支持在上述每个方法的代理过程中添加对应的`formatter`和`preFormatter`，只需在具体的实例中添加对应方法即可。
 4. 添加资源获取时的Promise对象缓存，缓存时间内的同一种请求返回同一个Promise对象，从而实现在多次资源获取中只有一次请求。
 
-```
+```js
 (function (angular) {
   angular.module('setting.services')
     .factory('reqSuccessCallback', function($q) {

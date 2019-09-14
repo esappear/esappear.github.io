@@ -13,7 +13,7 @@ tags: [HEXO, Github, Travis CI, CI, 总结]
 
 重新整理下流程：
 # 生成HEXO项目
-```
+```bash
 npm install hexo-cli -g 
 hexo init [project_name]
 cd [project_name]
@@ -27,11 +27,11 @@ hexo server
 ## 建立Github项目
 项目名称应为[user_name.github.io]
 ## 安装`hexo-deployer-git`
-```
+```bash
 npm install hexo-deployer-git --save
 ```
 ## 配置`_config.yml`
-```
+```bash
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
@@ -43,19 +43,19 @@ deploy:
 # 利用`Travis CI`实现自动化部署
 ## 开启`Travis CI`，并将对应的项目状态开启
 ## 生成公钥
-```
+```bash
 ssh-keygen -t rsa -C "youremail@example.com" # 生成id_rsa.pub和id_rsa
 ```
 ## 将`id_rsa.pub`添加到GitHub项目的Deploy key中，并将`Allow write access`打开
 ## 加密私钥
-```
+```bash
 mkdir .travis
 gem install travis # 安装 cli
 travis login --auto # 登录
 travis encrypt-file id_rsa --add # id_rsa为刚生成的密钥文件，这会在当前目录生成加密后的私钥文件id_rsa.enc，同时会输入encrypted_key 和 encrypted_iv
 ```
 ## 添加`ssh_config`
-```
+```bash
 Host github.com
     User git
     StrictHostKeyChecking no
@@ -64,7 +64,7 @@ Host github.com
 ```
 放在`.travis`目录中
 ## 配置`_travis.yml`
-```
+```yml
 # 声明语言和版本
 language: node_js
 node_js:

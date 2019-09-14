@@ -18,7 +18,7 @@ tags: [drone, 持续集成, CI, 持续交付]
 
 在尝试过多种方法后，最终还是采用了在项目下建个临时文件夹，拉下指定的仓库后，生成commit后强制push到远程的方法。
 
-```
+```yml
 # .drone.yml
 workspace:
   base: /data/gitbook
