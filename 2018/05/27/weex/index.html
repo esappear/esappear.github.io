@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://avatars2.githubusercontent.com/u/13843099?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://avatars2.githubusercontent.com/u/13843099?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://avatars2.githubusercontent.com/u/13843099?v=5.1.4">
+
+
+  <link rel="mask-icon" href="https://avatars2.githubusercontent.com/u/13843099?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="总结,Weex,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="是时候写点东西了。 话说这段经验已经跟团队内的人分享过两次了，直接把之前整理的大纲挪上来就好，但是跟别人做的总结跟自己做的总结总是有点不一样的，还是重新整理下吧。 What is Weex 一个使用 Web 开发体验来开发高性能原生应用的框架。  这是Weex的自我介绍，高不高性能可以再议，但是Web开发体验却是真的。 Weex俗称Vue Native，类似于React的React Native，">
+<meta name="keywords" content="总结,Weex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Weex初体验">
+<meta property="og:url" content="https://esappear.github.io/2018/05/27/weex/index.html">
+<meta property="og:site_name" content="Shawn&#39;s Blogs">
+<meta property="og:description" content="是时候写点东西了。 话说这段经验已经跟团队内的人分享过两次了，直接把之前整理的大纲挪上来就好，但是跟别人做的总结跟自己做的总结总是有点不一样的，还是重新整理下吧。 What is Weex 一个使用 Web 开发体验来开发高性能原生应用的框架。  这是Weex的自我介绍，高不高性能可以再议，但是Web开发体验却是真的。 Weex俗称Vue Native，类似于React的React Native，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://weex.apache.org/cn/guide/images/flow.png">
+<meta property="og:updated_time" content="2019-09-14T08:31:20.596Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Weex初体验">
+<meta name="twitter:description" content="是时候写点东西了。 话说这段经验已经跟团队内的人分享过两次了，直接把之前整理的大纲挪上来就好，但是跟别人做的总结跟自己做的总结总是有点不一样的，还是重新整理下吧。 What is Weex 一个使用 Web 开发体验来开发高性能原生应用的框架。  这是Weex的自我介绍，高不高性能可以再议，但是Web开发体验却是真的。 Weex俗称Vue Native，类似于React的React Native，">
+<meta name="twitter:image" content="https://weex.apache.org/cn/guide/images/flow.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://esappear.github.io/2018/05/27/weex/">
+
+
+
+
+
+  <title>Weex初体验 | Shawn's Blogs</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-84379338-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?90acdea32f2e6fa9d12e9992252a5378";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shawn's Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://esappear.github.io/2018/05/27/weex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shawn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/13843099">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shawn's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Weex初体验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T14:23:54+00:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>是时候写点东西了。</p>
+<p>话说这段经验已经跟团队内的人分享过两次了，直接把之前整理的大纲挪上来就好，但是跟别人做的总结跟自己做的总结总是有点不一样的，还是重新整理下吧。</p>
+<h1 id="What-is-Weex"><a href="#What-is-Weex" class="headerlink" title="What is Weex"></a>What is Weex</h1><blockquote>
+<p>一个使用 Web 开发体验来开发高性能原生应用的框架。</p>
+</blockquote>
+<p>这是<code>Weex</code>的自我介绍，高不高性能可以再议，但是Web开发体验却是真的。</p>
+<p><code>Weex</code>俗称<code>Vue Native</code>，类似于<code>React</code>的<code>React Native</code>，都试图用WEB技术来写NATIVE。与此类似的技术还有<code>NativeScript</code>、小程序和快应用等等。现在只比较<code>Weex</code>和<code>RN</code>，两者最大的区别从他们的宣传理念便可见端倪：前者是<code>Write once, run everywhere</code>，后者是<code>Learn once, write everywhere</code>。<code>RN</code>可以看做是一种语法，既可以用来写Web，又可以写Native，甚至还能写VR（见React 360），但是两者是互相隔离开的，两者用的都是不同的组件库。而<code>Weex</code>则可看做是一种兼容Web、Android、iOS三端的解决方案，一份代码可同时在三端运行，极大的提高了代码的复用性。</p>
+<h1 id="How-Weex-Works"><a href="#How-Weex-Works" class="headerlink" title="How Weex Works"></a>How Weex Works</h1><p><img src="https://weex.apache.org/cn/guide/images/flow.png" alt="Weex 工作原理图"></p>
+<blockquote>
+<p>在移动应用客户端里，Weex SDK 会准备好一个 JavaScript 执行环境，并且在用户打开一个 Weex 页面时在这个执行环境中执行相应的 JS bundle，并将执行过程中产生的各种命令发送到 native 端进行界面渲染、数据存储、网络通信、调用设备功能及用户交互响应等功能。</p>
+</blockquote>
+<p>上面的原理图和描述源于其官网，简单的说，<code>Weex</code>就是在Native环境中运行一份JS代码，并通过与Native的交互达到页面渲染、数据存储等功能。换句话说，不管我们在开发环境怎么折腾，只要最后把一份JS代码交给Native就OK。从这个角度来说，<code>Weex</code>对开发者还是蛮友好的。</p>
+<h1 id="How-to-Use"><a href="#How-to-Use" class="headerlink" title="How to Use"></a>How to Use</h1><p>其实很简单。</p>
+<ol>
+<li>安装<code>weex-toolkit</code><br><code>npm install -g weex-toolkit</code></li>
+<li>创建项目<br><code>weex create awesome-project</code></li>
+<li>安装依赖<br><code>cd awesome-project &amp;&amp; npm install</code></li>
+<li>开发<ul>
+<li>在浏览器预览<br><code>npm run dev &amp; npm run serve</code></li>
+<li>在App内预览（启一个静态server，然后用App扫一扫即可）<br><code>anywhere # 一个很有用的npm包，可以在任意目录下启动一个静态服务。</code></li>
+</ul>
+</li>
+<li>打包<br><code>npm run build</code></li>
+</ol>
+<h1 id="Project-in-Pratice"><a href="#Project-in-Pratice" class="headerlink" title="Project in Pratice"></a>Project in Pratice</h1><h2 id="Why-Weex"><a href="#Why-Weex" class="headerlink" title="Why Weex"></a>Why Weex</h2><ul>
+<li>每一个前端工程师都有一个全栈的梦想</li>
+<li>用Web写Native，方便人力资源的流动和调用</li>
+<li>编写适用三端的组件，提高代码的可复用性</li>
+</ul>
+<h2 id="Main-Packages"><a href="#Main-Packages" class="headerlink" title="Main Packages"></a>Main Packages</h2><ul>
+<li>weex</li>
+<li>vue + vue-router + vuex # 三套马车，终于齐全了</li>
+<li>weex-ui</li>
+<li>weex-axios # 可在weex使用的类axios库</li>
+<li>weex-bindingx # 用表达式来调用原生动画的库</li>
+</ul>
+<h2 id="Main-Output"><a href="#Main-Output" class="headerlink" title="Main Output"></a>Main Output</h2><p>在项目实践的时候，除了正常的业务逻辑的编写，一个主要产出就是各种拓展的模块和组件了，这也正体现了weex代码高复用性的特点。</p>
+<h3 id="Diff-in-Module-and-Component"><a href="#Diff-in-Module-and-Component" class="headerlink" title="Diff in Module and Component"></a>Diff in Module and Component</h3><p>在跟客户端同学交流的过程中，发现他们最容易搞混的概念就是模块和组件了，觉得有必要区分下：</p>
+<ul>
+<li>模块：功能层面的封装、在JS中使用、编程式调用</li>
+<li>组件：UI层面的封装、在模板中使用、声明式调用</li>
+</ul>
+<h3 id="Customer-Modules"><a href="#Customer-Modules" class="headerlink" title="Customer Modules"></a>Customer Modules</h3><ul>
+<li>qcModal # 自定义样式的modal</li>
+<li>qcShare # 用于分享</li>
+<li>qcNavigator # 用于跳转原生页面</li>
+<li>qcTrack # 用于埋点</li>
+<li>qcTel # 用于拨打电话</li>
+</ul>
+<h3 id="Customer-Compents"><a href="#Customer-Compents" class="headerlink" title="Customer Compents"></a>Customer Compents</h3><ul>
+<li>qc-rich-text # 富文本</li>
+<li>qc-qr-code # 二维码</li>
+</ul>
+<p>Tips: 由于weex追求的是三端均可正常使用，因此对于上面的自定义模块和组件，Web, Android和iOS都需要有各自的实现，同时保持接口一致。</p>
+<h2 id="Main-Problems"><a href="#Main-Problems" class="headerlink" title="Main Problems"></a>Main Problems</h2><p>在开发过程中，不踩坑是不可能的，其中最大的包括以下几个。</p>
+<h3 id="Pack"><a href="#Pack" class="headerlink" title="Pack"></a>Pack</h3><p>由于历史原因，核心项目没有前后端分离，所以最后不论怎么着，我都要把<code>weex</code>项目引用到核心项目中去。同时我需要处理怎么把打包好的JS文件给到客户端，并实现热更新（这点也是促使我们使用<code>weex</code>的很重要的一点）。</p>
+<p>最后的实现方式是，修改了<code>weex</code>项目的打包配置，在生成js文件之后，一方面将其中给Native使用的js文件生成一份基于MD5的版本号映射文件<code>version.json</code>或<code>version_test.json</code>，并将该文件和之前打包好的文件上传到upyun，然后App可以在每次启动时获取这个版本文件，并更新其静态资源，从而实现热更新。另一方面，我们会将整个项目打包上传自己的npm服务器上，并在核心项目中安装引用这个npm包。这样，客户端和Web端都能同时使用整个<code>weex</code>项目的业务代码，达到一份代码三端使用的目的。</p>
+<h3 id="Navigator"><a href="#Navigator" class="headerlink" title="Navigator"></a>Navigator</h3><p>其实<code>weex</code>提供了一个<code>navigator</code>的模块，用于实现页面间的跳转。但由于实际项目中多个页面共享了<code>vuex</code>中的状态（如购物车的状态需要多个页面共享），而<code>vuex</code>状态的持久化比较麻烦，同时web端页面的跳转只能用<code>vue-router</code>来实现，因此最后舍弃了<code>navigator</code>，直接用<code>vue-router</code>的<code>abstract</code>模式去管理页面的跳转。</p>
+<h3 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h3><p><code>weex</code>提供的<code>animation</code>只有一个<code>animation.transition(el, options, callback)</code>的API，当我需要实现复杂动画的时候，如实现一个抛物线动画的时候，我只能多次调用这个API，并在每次的callback中指定下一次调用。但这样的调用涉及到多次上下文的切换，造成的后果就是在安卓上会卡顿。在尝试过自定义的<code>animation</code>模块之后，我们发现了<code>weex-bindingX</code>这个好东西，可以直接用动画表达式的方式一次性将需要执行的动画通知到客户端，从而减少了上下文切换的成本。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">BindingX.bind(&#123;</span><br><span class="line">  eventType: &apos;timing&apos;,</span><br><span class="line">  props: [&#123;</span><br><span class="line">    element: el,</span><br><span class="line">    property:&apos;transform.translateX&apos;,</span><br><span class="line">    expression: `linear(t, $&#123;from.left - to.left&#125;, $&#123;to.left - from.left&#125;, $&#123;duration&#125;)`,</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">    element: el,</span><br><span class="line">    property:&apos;transform.translateY&apos;,</span><br><span class="line">    expression: `easeInSine(t, $&#123;from.top - to.top&#125;, $&#123;to.top - from.top&#125;, $&#123;duration&#125;)`,</span><br><span class="line">  &#125;]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="Style-Compatibility"><a href="#Style-Compatibility" class="headerlink" title="Style Compatibility"></a>Style Compatibility</h3><p>样式兼容其实才是整个开发过程中最让人蛋疼、懵逼的问题，一份代码需要匹配三端，意味着我需要确保这一份CSS在三端的显示是正常的。然而这实际开发过程中经常有跟预期不一样的表现，其中的主要原因包括以下两点：</p>
+<ul>
+<li>安卓上的盒子模型是<code>overflow: hidden</code>的，所有超出盒子的内容就直接不展示。这个特点让人很难受，特别是在写组件的时候，经常会有浮层等一些超过父级元素大小的子元素，这个在<code>web</code>上可以正常显示的，但在安卓上就不行了。</li>
+<li>没有了文档流的概念。在web中，默认情况下所有的的元素都是会按照顺序自动计算宽高从上往下排列的，超过窗口的会自动滚动，超过盒子的也会显示，但在Native中，这些滚动必须要用scroll来实现。而且一旦一个盒子没有声明宽度或高度，它的渲染结果就会很有可能表现的很匪夷所思，如我曾遇到过的iOS上的黑线问题。因此，<strong>建议盒子最好都要显式的声明宽度和高度，不要依赖自动计算。</strong></li>
+</ul>
+<h3 id="Degradation-Programs"><a href="#Degradation-Programs" class="headerlink" title="Degradation Programs"></a>Degradation Programs</h3><p>由于<code>weex</code>是一门新技术，为了保留后路，我们也做好了在App内直接使用web页面的准备，<code>version.json</code>中的<code>weex-enabled</code>就是控制是用weex页面还是用web页面的开关。但由于项目中有些页面需要跳转到APP原来的Native页面，因此同样的页面跳转逻辑，我们需要保证web到Native和weex到Native都是OK，故而调试成本又上去了。</p>
+<h3 id="Render"><a href="#Render" class="headerlink" title="Render"></a>Render</h3><p>由于Native的限制，<code>weex</code>中的<code>vue</code>只能使用<code>v-if</code>，不能使用<code>v-show</code>，也就是说每当<code>v-if</code>对应的布尔值发生变化，其控制的元素就要重新渲染。当然这对一般的元素可能还不觉得有什么，但是要是有<code>v-if</code>要是控制了长列表的渲染，那状态切换时页面可就是卡的不要不要的了。当然后来<code>weex</code>提供了<code>recycle-list</code>的组件，不过这都是后话了。</p>
+<h1 id="After"><a href="#After" class="headerlink" title="After"></a>After</h1><p>说心里话，这个项目之后，我的心里还是蛮受伤的。想起今年年初的<a href="/2018/01/07/2017/">年初计划</a>，当时还是兴致勃勃的要尝试<code>Weex</code>，但尝试过后，我的第一感觉居然是不想再用了，其主要原因在于兼容多端的困难，尤其是Web和Native的样式表现差的太远，经常在Web上好好的样式到安卓上就挂了，好不容易安卓好了，iOS上又有问题。再加上没有一个好用的调试工具，因而在调试样式的时候还是蛮痛苦的。</p>
+<p>不过话说回来，我们为什么一定要执着于用<code>web</code>来写<code>Native</code>应用，<code>web</code>应用和<code>Native</code>应用到底有什么区别。</p>
+<p>经调研，不外乎渲染能力、离线能力、复杂动画、硬件接口这几点。但其实随着硬件的升级，渲染能力的差距其实已经很小了；而且对于简单的页面来说，两者几乎的差别真的是微乎其微。要知道，在定位问题的时候其他人问的关于APP的最多一个问题就是“这个页面是APP还是web”了。当前发展火热的<code>pwa</code>技术也填补了web离线能力的欠缺。不过对于复杂动画和调用硬件接口这两点，<code>web</code>应用还真是比不过<code>Native</code>应用了。</p>
+<p>所以说，在决定到底是web还是Native的时候，还是得多考虑下具体的业务需求。</p>
+<p>PS: 虽然在<code>weex</code>上受了点伤，但是最近还是被小程序（当然不是那种嵌着webview的假小程序）吸引了。看着自己写的demo在微信中流畅的切换，感觉还是挺好的。嘻嘻~</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/总结/" rel="tag"># 总结</a>
+          
+            <a href="/tags/Weex/" rel="tag"># Weex</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/24/leetcode-4/" rel="next" title="【一日一题】无重复字符的最长子串">
+                <i class="fa fa-chevron-left"></i> 【一日一题】无重复字符的最长子串
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/19/clear-docker/" rel="prev" title="一键清理没用的docker容器">
+                一键清理没用的docker容器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars2.githubusercontent.com/u/13843099" alt="Shawn">
+            
+              <p class="site-author-name" itemprop="name">Shawn</p>
+              <p class="site-description motion-element" itemprop="description">人生得意须尽欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/esappear" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#What-is-Weex"><span class="nav-number">1.</span> <span class="nav-text">What is Weex</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-Weex-Works"><span class="nav-number">2.</span> <span class="nav-text">How Weex Works</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#How-to-Use"><span class="nav-number">3.</span> <span class="nav-text">How to Use</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Project-in-Pratice"><span class="nav-number">4.</span> <span class="nav-text">Project in Pratice</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-Weex"><span class="nav-number">4.1.</span> <span class="nav-text">Why Weex</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-Packages"><span class="nav-number">4.2.</span> <span class="nav-text">Main Packages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-Output"><span class="nav-number">4.3.</span> <span class="nav-text">Main Output</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Diff-in-Module-and-Component"><span class="nav-number">4.3.1.</span> <span class="nav-text">Diff in Module and Component</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Customer-Modules"><span class="nav-number">4.3.2.</span> <span class="nav-text">Customer Modules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Customer-Compents"><span class="nav-number">4.3.3.</span> <span class="nav-text">Customer Compents</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-Problems"><span class="nav-number">4.4.</span> <span class="nav-text">Main Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pack"><span class="nav-number">4.4.1.</span> <span class="nav-text">Pack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Navigator"><span class="nav-number">4.4.2.</span> <span class="nav-text">Navigator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Animation"><span class="nav-number">4.4.3.</span> <span class="nav-text">Animation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Style-Compatibility"><span class="nav-number">4.4.4.</span> <span class="nav-text">Style Compatibility</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Degradation-Programs"><span class="nav-number">4.4.5.</span> <span class="nav-text">Degradation Programs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Render"><span class="nav-number">4.4.6.</span> <span class="nav-text">Render</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#After"><span class="nav-number">5.</span> <span class="nav-text">After</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shawn</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

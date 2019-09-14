@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="https://avatars2.githubusercontent.com/u/13843099?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="https://avatars2.githubusercontent.com/u/13843099?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="https://avatars2.githubusercontent.com/u/13843099?v=5.1.4">
+
+
+  <link rel="mask-icon" href="https://avatars2.githubusercontent.com/u/13843099?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,Promise,ES6,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近调研Promise,在小组内部分享,懒得再展开整理了,先把提纲什么的放在这么晾晾~ promise的由来解决异步编程的各种困难: 1.异常处理; 2.函数嵌套过深,回调地狱; 3.异步转同步 其主要两种解决方式: 1.事件发布与订阅模式; 2.Promise/Deferred 模式 CommonJs的promise模型Promise/APromise对象有三种状态: 未完成(pending)、">
+<meta name="keywords" content="JavaScript,Promise,ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise对象">
+<meta property="og:url" content="https://esappear.github.io/2016/08/23/promise/index.html">
+<meta property="og:site_name" content="Shawn&#39;s Blogs">
+<meta property="og:description" content="最近调研Promise,在小组内部分享,懒得再展开整理了,先把提纲什么的放在这么晾晾~ promise的由来解决异步编程的各种困难: 1.异常处理; 2.函数嵌套过深,回调地狱; 3.异步转同步 其主要两种解决方式: 1.事件发布与订阅模式; 2.Promise/Deferred 模式 CommonJs的promise模型Promise/APromise对象有三种状态: 未完成(pending)、">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-14T08:31:20.592Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Promise对象">
+<meta name="twitter:description" content="最近调研Promise,在小组内部分享,懒得再展开整理了,先把提纲什么的放在这么晾晾~ promise的由来解决异步编程的各种困难: 1.异常处理; 2.函数嵌套过深,回调地狱; 3.异步转同步 其主要两种解决方式: 1.事件发布与订阅模式; 2.Promise/Deferred 模式 CommonJs的promise模型Promise/APromise对象有三种状态: 未完成(pending)、">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://esappear.github.io/2016/08/23/promise/">
+
+
+
+
+
+  <title>Promise对象 | Shawn's Blogs</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-84379338-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?90acdea32f2e6fa9d12e9992252a5378";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shawn's Blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://esappear.github.io/2016/08/23/promise/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shawn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="https://avatars2.githubusercontent.com/u/13843099">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shawn's Blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Promise对象</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-23T23:35:03+00:00">
+                2016-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近调研Promise,在小组内部分享,懒得再展开整理了,先把提纲什么的放在这么晾晾~</p>
+<h3 id="promise的由来"><a href="#promise的由来" class="headerlink" title="promise的由来"></a>promise的由来</h3><p>解决异步编程的各种困难: 1.异常处理; 2.函数嵌套过深,回调地狱; 3.异步转同步</p>
+<p>其主要两种解决方式: 1.事件发布与订阅模式; 2.Promise/Deferred 模式</p>
+<h3 id="CommonJs的promise模型"><a href="#CommonJs的promise模型" class="headerlink" title="CommonJs的promise模型"></a>CommonJs的promise模型</h3><h4 id="Promise-A"><a href="#Promise-A" class="headerlink" title="Promise/A"></a>Promise/A</h4><p>Promise对象有三种状态: 未完成(pending)、完成(fulfilled) 和 失败(rejected).<br>Promise对象的状态转化只有两种:<br>    &gt; pending =&gt; fulfilled;<br>    &gt; pending =&gt; rejected;<br>Promise对象的状态一旦发生改变,将不能再更改.</p>
+<p>Promise对象的then方法，可接受三个回调函数 onFulFilled, onRejected, onProgress(返回进度消息时)</p>
+<h4 id="Promise与Deferred的区别"><a href="#Promise与Deferred的区别" class="headerlink" title="Promise与Deferred的区别"></a>Promise与Deferred的区别</h4><p>Deferred主要用于内部,负责维护模型的状态,Promise则用于外部,暴露接口给外部添加业务逻辑.</p>
+<h4 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h4><p>then()方法调用后返回的是一个新的Promise对象,该对象同样也有then()方法,因此可实现链式调用(promise chain).<br>基本原则: 一个promise对象必须是fulfilled状态或rejected状态才能调用then方法中的callback.<br>1.内部链式调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">return getUsername()</span><br><span class="line">.then(function (username) &#123;</span><br><span class="line">    return getUser(username)</span><br><span class="line">    .then(function (user) &#123;</span><br><span class="line">        // if we get here without an error,</span><br><span class="line">        // the value returned here</span><br><span class="line">        // or the exception thrown here</span><br><span class="line">        // resolves the promise returned</span><br><span class="line">        // by the first line</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>2.外部链式调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">return getUsername()</span><br><span class="line">.then(function (username) &#123;</span><br><span class="line">    return getUser(username);</span><br><span class="line">&#125;)</span><br><span class="line">.then(function (user) &#123;</span><br><span class="line">    // if we get here without an error,</span><br><span class="line">    // the value returned here</span><br><span class="line">    // or the exception thrown here</span><br><span class="line">    // resolves the promise returned</span><br><span class="line">    // by the first line</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>第一种方式看起来跟普通的回调函数没什么区别,也很容易掉到回调地狱中, 第二种逻辑清晰, 但是具体业务中可根据业务逻辑内外部混合链式调用.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">return getUsername()</span><br><span class="line">.then(function (username) &#123;</span><br><span class="line">    return getUser(username);</span><br><span class="line">&#125;)</span><br><span class="line">// chained because we will not need the user name in the next event</span><br><span class="line">.then(function (user) &#123;</span><br><span class="line">    return getPassword()</span><br><span class="line">    // nested because we need both user and password next</span><br><span class="line">    .then(function (password) &#123;</span><br><span class="line">        if (user.passwordHash !== hash(password)) &#123;</span><br><span class="line">            throw new Error(&quot;Can&apos;t authenticate&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h4 id="Promise-B"><a href="#Promise-B" class="headerlink" title="Promise/B"></a>Promise/B</h4><p>增加了API，如when方法</p>
+<h4 id="Promise-D"><a href="#Promise-D" class="headerlink" title="Promise/D"></a>Promise/D</h4><p>如何判断一个对象是Promise对象</p>
+<h3 id="Promise-A-组织"><a href="#Promise-A-组织" class="headerlink" title="Promise/A+组织"></a>Promise/A+组织</h3><p>对then方法进行了补充<br>将then方法作为promise对象的甄别方法</p>
+<h3 id="Promise实现"><a href="#Promise实现" class="headerlink" title="Promise实现"></a>Promise实现</h3><p>1.Q模块 主要基于Promise/A<br>2.ES6 Promise 基于Promise/A+</p>
+<p>主要差别：<br>1.notify callback<br>2.可通过操作Deferred对象更改Promise对象的状态<br>3.值的传递：<br>    &gt; 前者必须返回 promise对象才能将promise对象resolve的值传递给那个then方法里的回调函数<br>    &gt; 后者then方法中返回的值（非promise对象）可直接传递给下个then方法</p>
+<h4 id="Angular中的Promise-q，依赖于-rootScope"><a href="#Angular中的Promise-q，依赖于-rootScope" class="headerlink" title="Angular中的Promise - $q，依赖于$rootScope"></a>Angular中的Promise - $q，依赖于$rootScope</h4><p>两种主要返回promise方式：类Q和类ES6</p>
+<h5 id="1-类Q"><a href="#1-类Q" class="headerlink" title="1.类Q"></a>1.类Q</h5><p>创建Deferred对象: <code>var deferred = $q.defer()</code><br>Deferred对象的API<br><code>deferred.resolve(value)</code><br><code>deferred.reject(reason)</code><br><code>deferred.notify(value)</code></p>
+<p>返回Promise对象: <code>return deferred.promise</code></p>
+<p>Promise 的方法<br><code>promise.then(successCallback, errorCallback, notifyCallback)</code><br><code>promise.catch(errorCallback)</code><br><code>promise.finally(callback, notifyCallback)</code></p>
+<h5 id="2-类ES6"><a href="#2-类ES6" class="headerlink" title="2.类ES6"></a>2.类ES6</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$q(function(resolve, reject)&#123;</span><br><span class="line">   //Do somthing to resolve</span><br><span class="line">   setTimeout(function()&#123;</span><br><span class="line">       if (Math.random() &gt; 0.5) &#123;</span><br><span class="line">           resolve(&apos;resolved&apos;);</span><br><span class="line">       &#125; else &#123;</span><br><span class="line">           reject(&apos;rejected&apos;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;, 1000)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>$q.resolve(value)</code><br>直接返回一个fulfilled状态的promise对象, 并向之后then方法中的回调函数传入值value<br><code>$q.reject(reason)</code><br>直接返回一个rejected状态的promise对象, 并向之后then方法中的回调函数传入值reason</p>
+<p><code>$q.all(promises)</code><br><code>$q.race(promises)</code></p>
+<h4 id="ES6-Promise"><a href="#ES6-Promise" class="headerlink" title="ES6 Promise"></a>ES6 Promise</h4><p>创建promise对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise= new Promise(function(resolve, reject)&#123;</span><br><span class="line">    //Do somthing to resolve</span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">        if (Math.random() &gt; 0.5) &#123;</span><br><span class="line">            resolve(&apos;resolved&apos;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            reject(&apos;rejected&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;, 1000)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>1.异步调用<br>2.[[PromiseStatus]], [[PromiseValue]]，每次调用then方法后都返回一个新的promise对象<br>3.promise对象的API<br><code>then(onFulfilled, onRejected)</code>, <code>catch(onRejected)</code><br>4.Promise的API<br><code>all(promises)</code>, <code>race(promises)</code><br><code>resolve(value)</code>, <code>reject(reason)</code></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/Promise/" rel="tag"># Promise</a>
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/04/square/" rel="next" title="自适应的正方形">
+                <i class="fa fa-chevron-left"></i> 自适应的正方形
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/18/crisis/" rel="prev" title="突如其来的危机感">
+                突如其来的危机感 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="https://avatars2.githubusercontent.com/u/13843099" alt="Shawn">
+            
+              <p class="site-author-name" itemprop="name">Shawn</p>
+              <p class="site-description motion-element" itemprop="description">人生得意须尽欢</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/esappear" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#promise的由来"><span class="nav-number">1.</span> <span class="nav-text">promise的由来</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CommonJs的promise模型"><span class="nav-number">2.</span> <span class="nav-text">CommonJs的promise模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise-A"><span class="nav-number">2.1.</span> <span class="nav-text">Promise/A</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise与Deferred的区别"><span class="nav-number">2.2.</span> <span class="nav-text">Promise与Deferred的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链式调用"><span class="nav-number">2.3.</span> <span class="nav-text">链式调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise-B"><span class="nav-number">2.4.</span> <span class="nav-text">Promise/B</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Promise-D"><span class="nav-number">2.5.</span> <span class="nav-text">Promise/D</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise-A-组织"><span class="nav-number">3.</span> <span class="nav-text">Promise/A+组织</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Promise实现"><span class="nav-number">4.</span> <span class="nav-text">Promise实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Angular中的Promise-q，依赖于-rootScope"><span class="nav-number">4.1.</span> <span class="nav-text">Angular中的Promise - $q，依赖于$rootScope</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-类Q"><span class="nav-number">4.1.1.</span> <span class="nav-text">1.类Q</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-类ES6"><span class="nav-number">4.1.2.</span> <span class="nav-text">2.类ES6</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6-Promise"><span class="nav-number">4.2.</span> <span class="nav-text">ES6 Promise</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shawn</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
